@@ -50,7 +50,7 @@ main() {
     git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@${GITHUB_HOSTNAME}":
     if [[ "$BUILD_THEMES" ]]; then
         echo "Fetching themes"
-        #git submodule update --init --recursive
+        git submodule update --init --recursive
     fi
 
     version=$(zola --version)
