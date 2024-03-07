@@ -17,11 +17,15 @@ output_dir = "public"
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 
+[params]
+	mode="auto" # color-mode → light,dark,toggle or auto
+	useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
+	subtitle = "Minimal and Clean [blog theme for Hugo](https://github.com/athul/archie)"
+	mathjax = true # enable MathJax support
+	katex = true # enable KaTeX support
+
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
-
-# if set true, will use external CDN resource to load font and js file
-useCDN = false
 
 [markdown]
 # Whether to do syntax highlighting
