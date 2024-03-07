@@ -34,10 +34,10 @@ highlight_code = true
 
 transparent = true
 
-copyright = "Dunateo"
 
 [extra]
 mode="auto"
+copyright = "Dunateo"
 
 [extra.translations]
 languages = [{name = "en", url = "/"}]
