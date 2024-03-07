@@ -1,0 +1,43 @@
+# The URL the site will be built for
+base_url = "https://dunateo.github.io/"
+
+# The site title and description; used in feeds by default.
+title = "Superthévenin Blog"
+description = "Superthévenin personal website for various notes and ideas"
+
+# The default language; used in feeds.
+default_language = "en"
+
+# The site theme to use.
+theme = "archie-zola"
+
+# For overriding the default ouput directory `public`, set it to another value (e.g.: "docs")
+output_dir = "public"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+
+taxonomies = [
+    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+
+[extra]
+# Put all your custom variables here
+after_dark_menu = [
+    {url = "$BASE_URL", name = "Home"},
+    {url = "$BASE_URL/categories", name = "Categories"},
+    {url = "$BASE_URL/tags", name = "Tags"},
+]
+
+after_dark_title = "Superthévenin Blog"
+
+author = "Dunateo"
