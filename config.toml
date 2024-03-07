@@ -1,6 +1,3 @@
-# control dark mode: auto | dark | toggle
-mode = "toggle"
-
 # The URL the site will be built for
 base_url = "https://dunateo.github.io/"
 
