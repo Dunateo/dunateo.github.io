@@ -34,7 +34,6 @@ highlight_code = true
 
 transparent = true
 
-
 [extra]
 mode="auto"
 copyright = "Dunateo"
@@ -62,15 +61,9 @@ menus = [
 [[extra.social]]
 icon = "github"
 name = "GitHub"
-url = "https://github.com/XXXMrG/archie-zola"
+url = "https://github.com/Dunateo"
 
 [[extra.social]]
 icon = "twitter"
 name = "Twitter"
-url = "https://github.com/your-name/"
-
-[[extra.social]]
-icon = "gitlab"
-name = "GitLab"
-url = "https://gitlab.com/your-name/"
-
+url = "https://twitter.com/superthevenin"
