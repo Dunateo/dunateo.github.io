@@ -1,7 +1,7 @@
 +++
 title = "Red_bpf Crate"
 date = "2021-11-26"
-description = "See how to config your archie theme"
+description = "Enhance your eBPF library in Rust with Cargo-BPF for seamless installation and optimal performance."
 
 [extra]
 author = { name = "Dunateo", social= "https://github.com/Dunateo" }
