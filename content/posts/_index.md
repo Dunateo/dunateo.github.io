@@ -1,5 +1,7 @@
 +++
-paginate_by = 3
+path = "posts"
+template = "posts.html"
+transparent = true
 sort_by = "date"
 
 [extra]
