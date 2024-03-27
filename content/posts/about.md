@@ -3,8 +3,6 @@ title = "About US"
 date = "2024-03-26"
 description = "about Superthévenin"
 
-[taxonomies]
-tags = ["about"]
 
 [extra]
 author = { name = "Dunateo", social= "https://github.com/Dunateo" }
