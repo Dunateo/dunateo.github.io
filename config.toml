@@ -2,8 +2,8 @@
 base_url = "https://dunateo.github.io/"
 
 # The site title and description; used in feeds by default.
-title = "Dunateo Blog"
-description = "I share creations and what I learn !"
+title = "Duna's Kiat"
+description = "my stuff blog"
 
 # The default language; used in feeds.
 default_language = "en"
@@ -20,7 +20,7 @@ compile_sass = true
 [params]
 	mode="auto" # color-mode → light,dark,toggle or auto
 	useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
-	subtitle = "Minimal and Clean [blog theme for Hugo](https://github.com/athul/archie)"
+	subtitle = "Dunateo Blog"
 	mathjax = true # enable MathJax support
 	katex = true # enable KaTeX support
 
