@@ -10,7 +10,7 @@ author = { name = "Dunateo", social= "https://github.com/Dunateo" }
 ## Curiosity
 
 So there I was in curiosity about LLMs (Large Language Models). 
-You know how it goes - one minute you're browsing tech blogs, the next you're diving headfirst into the deep end of AI. 
+You know how it goes one minute you're browsing tech blogs, the next you're diving headfirst into the deep end of AI. 
 
 I decided to give myself a little challenge. 
 
@@ -112,9 +112,7 @@ A 'nan' in the gradient norm is like a check engine light. It could mean explodi
 To tackle the 'nan' gradient norm, I made some key adjustments:
 
 - Reduced the learning rate: This slows down the model's parameter updates, helping to prevent drastic changes that could lead to instability.
-
 - Added gradient clipping: By setting a maximum threshold for gradient values, we avoid the 'exploding gradients' problem that can derail training.
-
 - Fine-tuned gradient accumulation: Since I initially used this to compensate for my PC's limited memory, I needed to balance it carefully. Too much accumulation can lead to noisy updates, while too little negates its benefits.
 
 Each parameter plays a crucial role in guiding the model towards optimal performance.
