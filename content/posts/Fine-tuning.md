@@ -127,9 +127,10 @@ After three epochs, we landed at a training loss of 3.0617 and saw the evaluatio
 The gap between training and evaluation loss suggests our model's got some good generalization skills.
 
 For the data visualization lovers, here are some nifty Tensorboard graphs:
-<img src="../images/tensorboard_1.png" alt="eval/loss graph" />
 
-<img src="../images/tensorboard_2.png" alt="training graphs" />
+![eval/loss graph](https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/tensorboard_1.png?raw=true)
+
+![training graphs](https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/tensorboard_2.png?raw=true)
 
 ## Inference
 
