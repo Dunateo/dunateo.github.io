@@ -171,3 +171,4 @@ These are all areas I plan to explore further to deepen my understanding of fine
 
 
 If you want to try it yourself, you can find the model here:
+[Model](link)
