@@ -24,11 +24,13 @@ My goal? To fine-tune a large language model. It's like teaching an AI to unders
 
 So, there I was, ready to start this journey into AI and Cybersecurity. Who knew that trying to make a computer grasp vulnerabilities could be so intriguing? (me)
 
+![concept diagram](https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/concept.png?raw=true)
+
 ## Creating Dataset
 
 First things first, I needed a dataset. It's like teaching a kid math, right? You need to understand the concept yourself and then give them examples to practice on.
  
-In this case, my 'math problem' was classifying vulnerabilities, and I needed descriptions matched with CWEs (Common Weakness Enumerations). Now, here's the tricky part - vulnerabilities can often match multiple CWEs. To keep things simple, I decided to focus on the CWE that fit best. You know, like picking your favorite flavor when faced with a triple scoop ice cream cone.
+In this case, my 'math problem' was classifying vulnerabilities, and I needed descriptions matched with CWEs (Common Weakness Enumerations). Now, here's the tricky part vulnerabilities can often match multiple CWEs. To keep things simple, I decided to focus on the CWE that fit best. You know, like picking your favorite flavor when faced with a triple scoop ice cream cone.
 
 So, where to get this data? 
 Lucky for me, there's MITRE folks who manage the CVE (Common Vulnerabilities and Exposures) numbering system and NIST, who analyze them. 
@@ -40,7 +42,6 @@ With the latest updates, there's now a site sharing their entire database as JSO
 Let's get this dataset done.
 
 [All CVEs in Json](https://www.cve.org/Downloads)
-
 
 ```Python
 # description
@@ -59,15 +60,17 @@ You can check out my dataset here: [VulnDesc_CWE_Mapping](https://huggingface.co
 
 For a truly comprehensive dataset, I'd need to analyze and classify the rest of the database. But hey, 2.6K is a pretty solid start for our AI's vulnerability vocabulary lessons, don't you think?
 
+![More data gif](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjQyZGJuaGlwMzBqaW1udW1jdmx5ZWFpOTJ3a3d2bDFwM2s2MjV3aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTtoU4hkyq8W48re2f/giphy.gif)
+
 ## Model Matchmaking Adventure
 
 I've got my dataset all prepped and ready to go. Now comes the fun part choosing which model to fine-tune. I've been hearing buzz about Mistral 7B, Llama 3, GPT...
 
 But here's the thing I'm not looking for a chatty AI buddy. Nope, I need a text-analyzing, classification model.
 
-So from what I understood there's this cool duo called "BERT/RoBERTa". Why ? 
+From my research, I discovered two powerful models called BERT and RoBERTa. Why are they important?
 
-Well, what I'm aiming for is something called Sequence Classification. Fancy name, right? Basically, I need a model that can read a text, get the context, and understand what each word means in that specific situation. Like teaching AI to read between the lines.
+Well, what I'm aiming for is something called Sequence Classification. Fancy name, right? Basically, I need a model that can analyze text, understand its context, and grasp the meaning of each word in its specific setting. It's like teaching AI to comprehend nuances and read between the lines.
 
 These models are called encoders. And when I fine-tune one, I'll be adding a classification layer at the end.
 
@@ -95,6 +98,8 @@ val_dataset = val_dataset.map(tokenize_function, batched=True)
 ```
 
 Now for the real challenge: TrainingArguments. I started with RoBERTa's standard settings, but my old PC kept throwing 'backend out of memory' errors. It was like trying to fit an elephant into a Mini Cooper. I had to get creative reducing batch size, adding gradient accumulation, and ditching 'fp16=True' which apparently didn't worked with my PC.
+
+![Mini cooper gif](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmtkODRxOHh5MjNrcW5xZ3ExOHhpanRuNzM2bDc5OG9kaWFzbnI4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohhwGlRDNX7MtBkIw/giphy.gif)
 
 After some tweaking, I finally saw those beautiful percentage bars and training logs: 
 ```Bash
@@ -171,3 +176,6 @@ These are all areas I plan to explore further to deepen my understanding of fine
 
 If you want to try it yourself, you can find the model here:
 [Kelemia model](https://huggingface.co/Dunateo/roberta-cwe-classifier-kelemia)
+
+
+![IA gif](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzg3Z3g2dHBsZTgzdWE4ejgyOHlvazFnaXl3OGZzeWwyNDBnYTQxMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/AtemeKRsPRVESJ8zRq/giphy.gif)
