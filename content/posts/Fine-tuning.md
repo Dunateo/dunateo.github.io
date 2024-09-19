@@ -60,7 +60,9 @@ You can check out my dataset here: [VulnDesc_CWE_Mapping](https://huggingface.co
 
 For a truly comprehensive dataset, I'd need to analyze and classify the rest of the database. But hey, 2.6K is a pretty solid start for our AI's vulnerability vocabulary lessons, don't you think?
 
-![More data gif](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjQyZGJuaGlwMzBqaW1udW1jdmx5ZWFpOTJ3a3d2bDFwM2s2MjV3aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTtoU4hkyq8W48re2f/giphy.gif)
+<div align="center">
+  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjQyZGJuaGlwMzBqaW1udW1jdmx5ZWFpOTJ3a3d2bDFwM2s2MjV3aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTtoU4hkyq8W48re2f/giphy.gif" alt="More data gif">
+</div>
 
 ## Model Matchmaking Adventure
 
@@ -99,7 +101,10 @@ val_dataset = val_dataset.map(tokenize_function, batched=True)
 
 Now for the real challenge: TrainingArguments. I started with RoBERTa's standard settings, but my old PC kept throwing 'backend out of memory' errors. It was like trying to fit an elephant into a Mini Cooper. I had to get creative reducing batch size, adding gradient accumulation, and ditching 'fp16=True' which apparently didn't worked with my PC.
 
-![Mini cooper gif](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmtkODRxOHh5MjNrcW5xZ3ExOHhpanRuNzM2bDc5OG9kaWFzbnI4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohhwGlRDNX7MtBkIw/giphy.gif)
+<div align="center">
+  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmtkODRxOHh5MjNrcW5xZ3ExOHhpanRuNzM2bDc5OG9kaWFzbnI4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohhwGlRDNX7MtBkIw/giphy.gif" alt="Mini cooper gif">
+</div>
+
 
 After some tweaking, I finally saw those beautiful percentage bars and training logs: 
 ```Bash
@@ -178,4 +183,6 @@ If you want to try it yourself, you can find the model here:
 [Kelemia model](https://huggingface.co/Dunateo/roberta-cwe-classifier-kelemia)
 
 
-![IA gif](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzg3Z3g2dHBsZTgzdWE4ejgyOHlvazFnaXl3OGZzeWwyNDBnYTQxMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/AtemeKRsPRVESJ8zRq/giphy.gif)
+<div align="center">
+  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzg3Z3g2dHBsZTgzdWE4ejgyOHlvazFnaXl3OGZzeWwyNDBnYTQxMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/AtemeKRsPRVESJ8zRq/giphy.gif" alt="IA gif">
+</div>
