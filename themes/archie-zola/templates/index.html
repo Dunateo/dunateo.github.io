@@ -16,12 +16,9 @@
                 {% endif %}
             </div>
 
-            {%- if paginator %}
-                {%- set show_pages = paginator.pages -%}
-            {% else %}
-                {% set section = get_section(path="posts/_index.md") %}
-                {%- set show_pages = section.pages -%}
-            {% endif -%}
+            
+            {% set section = get_section(path="posts/_index.md") %}
+            {%- set show_pages = section.pages -%}
 
             {{ post_macros::list_posts(pages=show_pages, extra=config.extra) }}
         </main>
