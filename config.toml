@@ -50,9 +50,9 @@ posted_on = "on "
 posted_by = "Published by"
 read_time = "minute read"
 menus = [
-    { name = "Home", url = "/posts", weight = 2 },
+    { name = "Home", url = "/", weight = 2 },
     { name = "All posts", url = "/posts", weight = 2 },
-	{ name = "News", url = "/news", weight = 2 },
+	{ name = "News", url = "/news", weight = 4 },
     { name = "About", url = "/about", weight = 3 },
 ]
 
