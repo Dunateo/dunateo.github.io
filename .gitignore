@@ -1,2 +1,3 @@
 # ignore development directory
 public/
+.DS_Store

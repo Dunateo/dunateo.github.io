@@ -1,6 +1,6 @@
 +++
 path = "news"
-template = "posts.html"
+template = "news.html"
 transparent = true
 sort_by = "date"
 
