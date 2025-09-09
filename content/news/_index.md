@@ -1,5 +1,4 @@
 +++
-path = "news"
 template = "news.html"
 transparent = true
 sort_by = "date"
