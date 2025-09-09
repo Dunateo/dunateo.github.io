@@ -6,7 +6,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5.0.0
       - name: build
         uses: ./
         env:
