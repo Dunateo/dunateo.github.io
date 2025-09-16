@@ -1,5 +1,7 @@
 {% extends "index.html" %}
 
+<link rel="stylesheet" type="text/css" media="screen" href={{ get_url(path="css/news.css") }} />
+
 {% block main_content %}
     {% set section = get_section(path="news/_index.md") %}
     {{ post_macros::list_title(pages=section.pages) }}
