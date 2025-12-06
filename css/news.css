@@ -1,0 +1,4 @@
+td[data-severity="critical" i] { color: #b71c1c; } /* rouge foncé */
+td[data-severity="high" i]     { color: #e65100; } /* orange foncé */
+td[data-severity="medium" i]   { color: #f9a825; } /* jaune soutenu */
+td[data-severity="low" i]      { color: #2e7d32; } /* vert foncé */
