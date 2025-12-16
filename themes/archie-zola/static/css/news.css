@@ -1,9 +1,9 @@
-/* Featured News Card Layout */
+/* Featured News Card Layout - Mobile First */
 .featured-news-card {
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1.5rem;
     margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@
 }
 
 .featured-news-left h2 {
-    font-size: 2em;
+    font-size: 1.5em; /* Mobile-first font size */
     font-weight: bold;
     margin: 0;
 }
@@ -37,19 +37,17 @@
     color: var(--text-color);
 }
 
-
-@media (max-width: 767px) {
-    .featured-news-card {
-        padding: 1.5rem;
-    }
-    .featured-news-left h2 {
-        font-size: 1.5em;
-    }
-}
+/* Desktop styles */
 @media (min-width: 768px) {
     .featured-news-card {
+        padding: 2rem;
         flex-direction: row;
         gap: 2rem;
         align-items: center;
     }
+
+    .featured-news-left h2 {
+        font-size: 2em; /* Larger font size for desktop */
+    }
 }
+
