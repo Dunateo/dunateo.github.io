@@ -10,6 +10,14 @@
     gap: 1rem;
 }
 
+@media (min-width: 768px) {
+    .featured-news-card {
+        flex-direction: row;
+        gap: 2rem;
+        align-items: center;
+    }
+}
+
 .featured-news-left {
     flex: 2;
 }
@@ -35,21 +43,4 @@
     flex: 3;
     font-size: 1.1em;
     color: var(--text-color);
-}
-
-
-@media (max-width: 767px) {
-    .featured-news-card {
-        padding: 1.5rem;
-    }
-    .featured-news-left h2 {
-        font-size: 1.5em;
-    }
-}
-@media (min-width: 768px) {
-    .featured-news-card {
-        flex-direction: row;
-        gap: 2rem;
-        align-items: center;
-    }
 }
