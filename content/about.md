@@ -9,7 +9,7 @@ author = { name = "Dunateo", social= "https://github.com/Dunateo" }
 
 ### Welcome to my blog !
 
-I'm a Computer Science engineer specializing in security. 
+I'm a Computer Science engineer working in security. 
 
 Through this blog, I share my insights and experiences as I learn.
 
