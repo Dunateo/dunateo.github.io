@@ -10,10 +10,6 @@
     gap: 1rem;
 }
 
-.featured-news-left {
-    flex: 2;
-}
-
 .featured-news-left h2 {
     font-size: 1.5em; /* Mobile-first font size */
     font-weight: bold;
@@ -32,7 +28,6 @@
 }
 
 .featured-news-right {
-    flex: 3;
     font-size: 1.1em;
     color: var(--text-color);
 }
@@ -44,6 +39,14 @@
         flex-direction: row;
         gap: 2rem;
         align-items: center;
+    }
+
+    .featured-news-left {
+        flex: 2 1 0%;
+    }
+
+    .featured-news-right {
+        flex: 3 1 0%;
     }
 
     .featured-news-left h2 {
