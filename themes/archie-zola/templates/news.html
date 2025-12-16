@@ -2,6 +2,94 @@
 
 
 {% block main_content %}
+
+
     {% set section = get_section(path="news/_index.md") %}
-    {{ post_macros::list_title(pages=section.pages) }}
+
+
+    <h1 class="page-title">Hottest News</h1>
+
+
+
+
+
+    {% if section.pages %}
+
+
+        {% set latest_post = section.pages | first %}
+
+
+        <div class="featured-news-card">
+
+
+            <div class="featured-news-left">
+
+
+                <h2><a href="{{ latest_post.permalink }}">{{ latest_post.title }}</a></h2>
+
+
+                <span class="meta">{{ latest_post.date | date(format="%Y-%m-%d") }}</span>
+
+
+            </div>
+
+
+            <div class="featured-news-right">
+
+
+                {% if latest_post.description %}
+
+
+                    {{ latest_post.description }}
+
+
+                {% elif latest_post.summary %}
+
+
+                    {{ latest_post.summary | striptags }}
+
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <h2 class="page-title" style="margin-top: 2rem;">Older News</h2>
+
+
+        <ul class="posts">
+
+
+            {% for page in section.pages | slice(start=1) %}
+
+
+                <li class="post">
+
+
+                    <a href="{{ page.permalink }}">{{ page.title }}</a>
+
+
+                    <span class="meta">{{ page.date | date(format="%Y-%m-%d") }}</span>
+
+
+                </li>
+
+
+            {% endfor %}
+
+
+        </ul>
+
+
+    {% endif %}
+
+
 {% endblock main_content %}
+
