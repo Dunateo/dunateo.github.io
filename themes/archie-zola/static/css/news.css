@@ -18,6 +18,10 @@
     color: var(--text-color);
 }
 
+.featured-news-card h2 a:hover {
+    color: #fff; /* Ensure text is white on hover */
+}
+
 .featured-news-card .meta {
     font-size: 0.9em;
     color: var(--text-color-light);
