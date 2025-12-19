@@ -432,3 +432,36 @@ table td {
   align-items: center;
   grid-column-gap: 10px;
 }
+
+/* Vulnerability Severity Styling */
+td[data-severity='Critical'] {
+    background-color: #990000;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+td[data-severity='High'] {
+    background-color: #ff8c00;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+td[data-severity='Medium'] {
+    background-color: #ffc700;
+    color: #333;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+td[data-severity='Low'] {
+    background-color: #006400;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}

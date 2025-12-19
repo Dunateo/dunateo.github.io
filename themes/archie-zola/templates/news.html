@@ -22,19 +22,13 @@
         <div class="featured-news-card">
 
 
-            <div class="featured-news-left">
+            <h2><a href="{{ latest_post.permalink }}">{{ latest_post.title }}</a></h2>
 
 
-                <h2><a href="{{ latest_post.permalink }}">{{ latest_post.title }}</a></h2>
+            <span class="meta">{{ latest_post.date | date(format="%Y-%m-%d") }}</span>
 
 
-                <span class="meta">{{ latest_post.date | date(format="%Y-%m-%d") }}</span>
-
-
-            </div>
-
-
-            <div class="featured-news-right">
+            <div class="description">
 
 
                 {% if latest_post.description %}
