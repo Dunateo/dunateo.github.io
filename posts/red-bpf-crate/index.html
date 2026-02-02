@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    
+        <title>
+             Red_bpf Crate
+            
+        </title>
+
+        
+            <meta property="og:title" content="Red_bpf Crate" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Enhance your eBPF library in Rust with Cargo-BPF for seamless installation and optimal performance." />
+        
+    
+
+    
+        
+            <meta name="description" content="Enhance your eBPF library in Rust with Cargo-BPF for seamless installation and optimal performance." />
+        
+    
+
+    
+
+    
+
+    
+
+    
+    
+        <script src=https://dunateo.github.io/js/feather.min.js></script>
+    
+
+
+    
+        <link href=https://dunateo.github.io/css/fonts.css rel="stylesheet" />
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://dunateo.github.io/css/main.css />
+    <link rel="stylesheet" type="text/css" href=https://dunateo.github.io/css/news.css />
+
+    
+        <link
+            rel="stylesheet"
+            id="darkModeStyle"
+            type="text/css"
+            href=https://dunateo.github.io/css/dark.css
+            
+                media="(prefers-color-scheme: dark)"
+            
+            
+        />
+    
+
+    
+
+
+    
+
+
+</head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main" id="main_title">
+        <a href=https:&#x2F;&#x2F;dunateo.github.io&#x2F;>Duna&#x27;s Kiat</a>
+    </div>
+
+    <nav>
+        
+            <a href=&#x2F;>Home</a>
+        
+            <a href=&#x2F;posts>All posts</a>
+        
+            <a href=&#x2F;news>News</a>
+        
+            <a href=&#x2F;about>About</a>
+        
+
+        
+            |
+
+            
+                <a href=&#x2F;>en</a>
+            
+        
+
+        
+    </nav>
+</header>
+
+
+        
+    
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">Red_bpf Crate</h1>
+            <div class="meta">
+                
+                    Published by <a href="https:&#x2F;&#x2F;github.com&#x2F;Dunateo" target="_blank">Dunateo</a>
+                
+                on  2021-11-26
+
+                
+            </div>
+        </div>
+
+        
+
+        <section class="body">
+            <img src="https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fwww.straypaper.com%2Fcontent%2Fimages%2F2023%2F04%2FEBPF_logo-1.png&sp=1711505863Td178151d1995d502ea0334c6d5eb233ab538809ac79edd74e06d70d1b612bebf" alt="ebpf logo" width="180" height="80" />
+<aside>
+💡 Enhance your eBPF library in Rust with Cargo-BPF for seamless installation and optimal performance.
+<p>That's what I thought before diving into it for our project "develop a personal firewall".</p>
+</aside>
+<p>I'm going to share with you the problems we encountered when installing this crate ;)</p>
+<h1 id="llvm-11">llvm-11</h1>
+<p>First thing you need is llvm, grab it with this command</p>
+<p><a href="https://apt.llvm.org/">https://apt.llvm.org/</a></p>
+<p><code>bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)</code></p>
+<p>lvm-config --version <strong>should work</strong></p>
+<h1 id="install-dependencies">Install Dependencies</h1>
+<p>Preparation for the cargo installation.</p>
+<p>llvm 11:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span> apt-get</span><span style="color:#bf616a;"> -y</span><span> install build-essential zlib1g-dev \
+</span><span>		llvm-11-dev libclang-11-dev linux-headers-$(</span><span style="color:#bf616a;">uname -r</span><span>)
+</span></code></pre>
+<p>llvm 12 headers :</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">sudo</span><span> apt-get</span><span style="color:#bf616a;"> -y</span><span> install build-essential zlib1g-dev \
+</span><span>		llvm-12-dev libclang-12-dev linux-headers-$(</span><span style="color:#bf616a;">uname -r</span><span>) \
+</span><span>		libelf-dev
+</span></code></pre>
+<h1 id="install-rust">Install Rust</h1>
+<p><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs/ | sh</code></p>
+<p>Don't forget to copy the environment PATH</p>
+<h1 id="cargo-bpf">Cargo-bpf</h1>
+<p>And now the ultimate battle</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> install cargo-bpf
+</span><span>
+</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">llvm</span><span> error for 13 with last thing 
+</span><span>
+</span><span style="color:#bf616a;">rustup</span><span> default 1.55 work with llvm 12
+</span></code></pre>
+<p>You might have some errors.</p>
+<h2 id="error-time">Error Time</h2>
+<h3 id="llvm-error">LLVM Error</h3>
+<p>We will provide a comprehensive overview of all the LLVM errors we encountered.</p>
+<p><code>LLVM_SYS_110_PREFIX</code></p>
+<p>is set correctly if your install is not being detected automatically. LLVM_SYS_110_PREFIX should be pointing to your LLVM 11 install.</p>
+<p>For example on Fedora it would be LLMV_SYS_110_PREFIX=/usr,</p>
+<br>
+<p><code>LLVM_SYS_70_PREFIX</code></p>
+<h3 id="steps-to-reproduce">Steps to reproduce</h3>
+<ol>
+<li>remove preinstalled llvm: <code>sudo apt remove llvm -y</code>, and install llvm-11: <code>sudo apt install llvm-11 llvm-11-dev</code></li>
+<li>or the sh script should debug the 70 and 110</li>
+</ol>
+<p><a href="https://github.com/wasmerio/wasmer/issues/419">https://github.com/wasmerio/wasmer/issues/419</a></p>
+<br>
+<p><code>LLVM_SYS_90_ENV</code></p>
+<p>we didn't found anything but it exist</p>
+<p>when you build you can have problems with the 6 and it will not build so please be carefull in the process!</p>
+<h3 id="compilation-error">Compilation Error</h3>
+<p><code>libbpf/src</code></p>
+<p><a href="https://github.com/redsift/redbpf/issues/86">https://github.com/redsift/redbpf/issues/86</a></p>
+<p>try to run the examples code if you have problems to compile it check the sub modules</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>git submodule sync
+</span><span>git submodule update --init
+</span></code></pre>
+<h2 id="using-the-crate">Using the crate</h2>
+<h3 id="normal-build">Normal Build</h3>
+<p><code>cargo bpf build block_http</code></p>
+<h3 id="tc-hook-build">Tc Hook Build</h3>
+<p>You need cargo make if you want to explore the tc hook:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">//INSTALL
+</span><span style="color:#bf616a;">cargo</span><span> install</span><span style="color:#bf616a;"> --force</span><span> cargo-make
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">//BUILD
+</span><span style="color:#bf616a;">cargo</span><span> make bpf
+</span></code></pre>
+<h3 id="running-it">Running it</h3>
+<p>Buckle up, it's time to take your build for a spin!</p>
+<p>But before you can hit the gas, there's one crucial step you need to take - launching Cargo in sudo/root mode. This is the only way to ensure your project takes off without a hitch. So, strap yourself in, fire up your terminal, and get ready to unleash the full power of your freshly compiled masterpiece!</p>
+<p><code>sudo -i</code></p>
+<p>And install the dependencies for root user.</p>
+<p>This project undoubtedly holds great promise, but to truly unlock its full potential and make it accessible to everyone, additional development will be crucial. We will monitor that and experiment more on the eBPF solution for rust.</p>
+
+        </section>
+
+        
+
+    </article>
+</main>
+
+
+
+        <footer>
+  <div style="display:flex">
+    
+        <a class="soc" href=https:&#x2F;&#x2F;github.com&#x2F;Dunateo title=GitHub>
+            <i data-feather=github></i>
+        </a>
+    
+        <a class="soc" href=https:&#x2F;&#x2F;twitter.com&#x2F;BruValentin1 title=Twitter>
+            <i data-feather=twitter></i>
+        </a>
+    
+  </div>
+  <div class="footer-info">
+    2026 © Dunateo | <a
+      href="https://github.com/XXXMrG/archie-zola">Archie-Zola Theme</a>
+  </div>
+</footer>
+
+
+<script>
+    feather.replace();
+</script>
+
+
+    </div>
+</body>
+
+</html>
