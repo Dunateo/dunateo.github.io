@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    
+        <title>
+             Fine, let&#x27;s tune !
+            
+        </title>
+
+        
+            <meta property="og:title" content="Fine, let&#x27;s tune !" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Since the big LLM boom, I wanted to get my hands dirty and try to understand how to adapt a model to my specific task. Here’s an example that offers a security advisory and seeks to derive a CWE from its description." />
+        
+    
+
+    
+        
+            <meta name="description" content="Since the big LLM boom, I wanted to get my hands dirty and try to understand how to adapt a model to my specific task. Here’s an example that offers a security advisory and seeks to derive a CWE from its description." />
+        
+    
+
+    
+
+    
+
+    
+
+    
+    
+        <script src=https://dunateo.github.io/js/feather.min.js></script>
+    
+
+
+    
+        <link href=https://dunateo.github.io/css/fonts.css rel="stylesheet" />
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://dunateo.github.io/css/main.css />
+    <link rel="stylesheet" type="text/css" href=https://dunateo.github.io/css/news.css />
+
+    
+        <link
+            rel="stylesheet"
+            id="darkModeStyle"
+            type="text/css"
+            href=https://dunateo.github.io/css/dark.css
+            
+                media="(prefers-color-scheme: dark)"
+            
+            
+        />
+    
+
+    
+
+
+    
+
+
+</head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main" id="main_title">
+        <a href=https:&#x2F;&#x2F;dunateo.github.io&#x2F;>Duna&#x27;s Kiat</a>
+    </div>
+
+    <nav>
+        
+            <a href=&#x2F;>Home</a>
+        
+            <a href=&#x2F;posts>All posts</a>
+        
+            <a href=&#x2F;news>News</a>
+        
+            <a href=&#x2F;about>About</a>
+        
+
+        
+            |
+
+            
+                <a href=&#x2F;>en</a>
+            
+        
+
+        
+    </nav>
+</header>
+
+
+        
+    
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">Fine, let&#x27;s tune !</h1>
+            <div class="meta">
+                
+                    Published by <a href="https:&#x2F;&#x2F;github.com&#x2F;Dunateo" target="_blank">Dunateo</a>
+                
+                on  2024-08-14
+
+                
+            </div>
+        </div>
+
+        
+
+        <section class="body">
+            <h2 id="curiosity">Curiosity</h2>
+<p>So there I was in curiosity about LLMs (Large Language Models).
+You know how it goes one minute you're browsing tech blogs, the next you're diving headfirst into the deep end of AI.</p>
+<p>I decided to give myself a little challenge.</p>
+<p>Here's the task: take a vulnerability description, wait, and bam! Out pops a CWE (Common Weakness Enumeration) that fits like a glove.</p>
+<p>Sounds interesting, right?</p>
+<p>But I didn't want to take the easy way out (LOL). No regex searches for terms like DOS, XSS, or Code Execution. And forget about using some off-the-shelf algorithm.</p>
+<p>My goal? To fine-tune a large language model. It's like teaching an AI to understand security vulnerabilities.</p>
+<p>So, there I was, ready to start this journey into AI and Cybersecurity. Who knew that trying to make a computer grasp vulnerabilities could be so intriguing? (me)</p>
+<p><img src="https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/concept.png?raw=true" alt="concept diagram" /></p>
+<h2 id="creating-dataset">Creating Dataset</h2>
+<p>First things first, I needed a dataset. It's like teaching a kid math, right? You need to understand the concept yourself and then give them examples to practice on.</p>
+<p>In this case, my 'math problem' was classifying vulnerabilities, and I needed descriptions matched with CWEs (Common Weakness Enumerations). Now, here's the tricky part vulnerabilities can often match multiple CWEs. To keep things simple, I decided to focus on the CWE that fit best. You know, like picking your favorite flavor when faced with a triple scoop ice cream cone.</p>
+<p>So, where to get this data?
+Lucky for me, there's MITRE folks who manage the CVE (Common Vulnerabilities and Exposures) numbering system and NIST, who analyze them.
+My game plan?
+Grab JSON data for each vulnerability, check if it has a CWE, and if so, get that description for my CSV file.</p>
+<p>With the latest updates, there's now a site sharing their entire database as JSON files.</p>
+<p>Let's get this dataset done.</p>
+<p><a href="https://www.cve.org/Downloads">All CVEs in Json</a></p>
+<pre data-lang="Python" style="background-color:#2b303b;color:#c0c5ce;" class="language-Python "><code class="language-Python" data-lang="Python"><span style="color:#65737e;"># description
+</span><span>text = json_object[&#39;</span><span style="color:#a3be8c;">cna</span><span>&#39;][&#39;</span><span style="color:#a3be8c;">descriptions</span><span>&#39;][</span><span style="color:#d08770;">0</span><span>][&#39;</span><span style="color:#a3be8c;">value</span><span>&#39;].</span><span style="color:#bf616a;">replace</span><span>(&#39;</span><span style="color:#96b5b4;">\n</span><span>&#39;, &#39;&#39;)
+</span><span>
+</span><span style="color:#65737e;"># First CWE
+</span><span>label = json_object[&#39;</span><span style="color:#a3be8c;">adp</span><span>&#39;][</span><span style="color:#d08770;">0</span><span>][&#39;</span><span style="color:#a3be8c;">problemTypes</span><span>&#39;][</span><span style="color:#d08770;">0</span><span>][&#39;</span><span style="color:#a3be8c;">descriptions</span><span>&#39;][</span><span style="color:#d08770;">0</span><span>][&#39;</span><span style="color:#a3be8c;">description</span><span>&#39;].</span><span style="color:#bf616a;">replace</span><span>(&#39;</span><span style="color:#96b5b4;">\n</span><span>&#39;, &#39;&#39;)
+</span><span>
+</span><span style="color:#65737e;"># create a new row
+</span><span>final_dataset.</span><span style="color:#bf616a;">append</span><span>((text, label))
+</span></code></pre>
+<p>After some data struggle (because let's face it, data is never perfect out of the box), I managed to gather 2.6K rows of juicy vulnerability data.</p>
+<p>You can check out my dataset here: <a href="https://huggingface.co/datasets/Dunateo/VulnDesc_CWE_Mapping">VulnDesc_CWE_Mapping</a></p>
+<p>For a truly comprehensive dataset, I'd need to analyze and classify the rest of the database. But hey, 2.6K is a pretty solid start for our AI's vulnerability vocabulary lessons, don't you think?</p>
+<div align="center">
+  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjQyZGJuaGlwMzBqaW1udW1jdmx5ZWFpOTJ3a3d2bDFwM2s2MjV3aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NTtoU4hkyq8W48re2f/giphy.gif" alt="More data gif">
+</div>
+<h2 id="model-matchmaking-adventure">Model Matchmaking Adventure</h2>
+<p>I've got my dataset all prepped and ready to go. Now comes the fun part choosing which model to fine-tune. I've been hearing buzz about Mistral 7B, Llama 3, GPT...</p>
+<p>But here's the thing I'm not looking for a chatty AI buddy. Nope, I need a text-analyzing, classification model.</p>
+<p>From my research, I discovered two powerful models called BERT and RoBERTa. Why are they important?</p>
+<p>Well, what I'm aiming for is something called Sequence Classification. Fancy name, right? Basically, I need a model that can analyze text, understand its context, and grasp the meaning of each word in its specific setting. It's like teaching AI to comprehend nuances and read between the lines.</p>
+<p>These models are called encoders. And when I fine-tune one, I'll be adding a classification layer at the end.</p>
+<p>After some digging, I found two encoder models that caught my eye:</p>
+<p><a href="https://huggingface.co/FacebookAI/roberta-base">RoBERTa</a> (base)</p>
+<p><a href="https://huggingface.co/ehsanaghaei/SecureBERT">SecureBERT</a> (Bert trained on tech-savvy texts)</p>
+<p>My choice goes to RoBERTa, it stands out because of the significant improvements it made over BERT. It optimizes several hyper-parameters, resulting in better performance across various tasks.</p>
+<h2 id="fine-tune-it">Fine Tune it</h2>
+<p>So, I thought I'd conquered the hardest part. I figured it'd be a breeze to connect everything with a transformers library. Oh, how wrong I was!</p>
+<p>Setting up the virtual environment was like trying to solve a Rubik's cube. Dependencies refused to play nice, and I found myself in a tech tango I hadn't signed up for.</p>
+<p>Finally, with my virtual environment up and running, it was time to feed my AI some data. Here's the game plan: load the data, split it for evaluation (gotta test our AI's smarts), and tokenize it. Preparing a gourmet meal for our AI to feast on.</p>
+<pre data-lang="Python" style="background-color:#2b303b;color:#c0c5ce;" class="language-Python "><code class="language-Python" data-lang="Python"><span>train_df, val_df = </span><span style="color:#bf616a;">train_test_split</span><span>(df, </span><span style="color:#bf616a;">test_size</span><span>=</span><span style="color:#d08770;">0.2</span><span>, </span><span style="color:#bf616a;">random_state</span><span>=</span><span style="color:#d08770;">42</span><span>)
+</span><span style="color:#65737e;"># convert train_df, val_df to Hugging Face datasets and tokenize them
+</span><span>train_dataset = train_dataset.</span><span style="color:#bf616a;">map</span><span>(tokenize_function, </span><span style="color:#bf616a;">batched</span><span>=</span><span style="color:#d08770;">True</span><span>)
+</span><span>val_dataset = val_dataset.</span><span style="color:#bf616a;">map</span><span>(tokenize_function, </span><span style="color:#bf616a;">batched</span><span>=</span><span style="color:#d08770;">True</span><span>)
+</span></code></pre>
+<p>Now for the real challenge: TrainingArguments. I started with RoBERTa's standard settings, but my old PC kept throwing 'backend out of memory' errors. It was like trying to fit an elephant into a Mini Cooper. I had to get creative reducing batch size, adding gradient accumulation, and ditching 'fp16=True' which apparently didn't worked with my PC.</p>
+<div align="center">
+  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmtkODRxOHh5MjNrcW5xZ3ExOHhpanRuNzM2bDc5OG9kaWFzbnI4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohhwGlRDNX7MtBkIw/giphy.gif" alt="Mini cooper gif">
+</div>
+<p>After some tweaking, I finally saw those beautiful percentage bars and training logs:</p>
+<pre data-lang="Bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-Bash "><code class="language-Bash" data-lang="Bash"><span style="color:#bf616a;">{</span><span>&#39;</span><span style="color:#a3be8c;">loss</span><span>&#39;</span><span style="color:#bf616a;">:</span><span> 5.647, &#39;</span><span style="color:#a3be8c;">grad_norm</span><span>&#39;: 3.2627339363098145, &#39;</span><span style="color:#a3be8c;">learning_rate</span><span>&#39;: 1.0000000000000002e-06, &#39;</span><span style="color:#a3be8c;">epoch</span><span>&#39;: 0.15}
+</span></code></pre>
+<p>These logs are AI report card, showing how well it's learning. But after the first epoch, I got a scary surprise a 'nan' gradient norm. Smells like trouble, doesn't it?</p>
+<pre data-lang="Bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-Bash "><code class="language-Bash" data-lang="Bash"><span style="color:#bf616a;">{</span><span>&#39;</span><span style="color:#a3be8c;">loss</span><span>&#39;</span><span style="color:#bf616a;">:</span><span> 5.3575, &#39;</span><span style="color:#a3be8c;">grad_norm</span><span>&#39;: nan, &#39;</span><span style="color:#a3be8c;">learning_rate</span><span>&#39;: 1.1000000000000001e-05, &#39;</span><span style="color:#a3be8c;">epoch</span><span>&#39;: 1.69}                                            
+</span></code></pre>
+<p>A 'nan' in the gradient norm is like a check engine light. It could mean exploding gradients or them canceling each other out. Either way, not good for our training stability.</p>
+<p>To tackle the 'nan' gradient norm, I made some key adjustments:</p>
+<ul>
+<li>Reduced the learning rate: This slows down the model's parameter updates, helping to prevent drastic changes that could lead to instability.</li>
+<li>Added gradient clipping: By setting a maximum threshold for gradient values, we avoid the 'exploding gradients' problem that can derail training.</li>
+<li>Fine-tuned gradient accumulation: Since I initially used this to compensate for my PC's limited memory, I needed to balance it carefully. Too much accumulation can lead to noisy updates, while too little negates its benefits.</li>
+</ul>
+<p>Each parameter plays a crucial role in guiding the model towards optimal performance.</p>
+<p>We're back on track:</p>
+<pre data-lang="Bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-Bash "><code class="language-Bash" data-lang="Bash"><span style="color:#bf616a;">{</span><span>&#39;</span><span style="color:#a3be8c;">loss</span><span>&#39;</span><span style="color:#bf616a;">:</span><span> 5.6134, &#39;</span><span style="color:#a3be8c;">grad_norm</span><span>&#39;: 3.1113924980163574, &#39;</span><span style="color:#a3be8c;">learning_rate</span><span>&#39;: 3e-06, &#39;</span><span style="color:#a3be8c;">epoch</span><span>&#39;: 0.23}      
+</span></code></pre>
+<p>After three epochs, we landed at a training loss of 3.0617 and saw the evaluation loss drop from 4.639444828033447 to 2.821094036102295. For a dataset put together on the fly, I’d call that a win!</p>
+<p>The gap between training and evaluation loss suggests our model's got some good generalization skills.</p>
+<p>For the data visualization lovers, here are some nifty Tensorboard graphs:</p>
+<p><img src="https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/tensorboard_1.png?raw=true" alt="eval/loss graph" /></p>
+<p><img src="https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/tensorboard_2.png?raw=true" alt="training graphs" /></p>
+<h2 id="inference">Inference</h2>
+<p>Alright, so we've trained and tested our model. But the real question is: does it actually make sense in the wild?</p>
+<p>I did a simple inference script, just load the model, predict the class, and use a reverse dictionary to print out the proper CWE.</p>
+<p>I handpicked 10 vulnerability descriptions. I analyzed these myself first (you know, to set the bar) before letting our AI take a crack at them. And I've got to say, I was pretty impressed!</p>
+<p>Sometimes it hits, other times it's a near miss. But here's the kicker even when it doesn't nail it perfectly, its predictions are often justifiable. You can see the logic behind its choices.</p>
+<p>Did I mention it's lightning-fast? This AI doesn't mess around it spits out predictions quicker than I can type 'vulnerability'.</p>
+<p>Let's take a look at some examples:</p>
+<table><thead><tr><th>Descriptions</th><th>Predictions</th></tr></thead><tbody>
+<tr><td>IBM WebSphere Application Server is vulnerable to cross-site scripting. This vulnerability allows a privileged user to embed arbitrary JavaScript code in the Web UI thus altering the intended functionality potentially leading to credentials disclosure within a trusted session.</td><td>CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</td></tr>
+<tr><td>IBM WebSphere Application Server could allow a remote authenticated attacker, who has authorized access to the administrative console, to execute arbitrary code. Using specially crafted input, the attacker could exploit this vulnerability to execute arbitrary code on the system.</td><td>CWE-94 Improper Control of Generation of Code ('Code Injection')</td></tr>
+<tr><td>An improper privilege management vulnerability exists in Tenable Security Center where an authenticated, remote attacker could view unauthorized objects and launch scans without having the required privileges</td><td>CWE-284 Improper Access Control</td></tr>
+<tr><td>This vulnerability allows remote attackers to create a denial-of-service condition on affected installations of Ivanti Avalanche. Authentication is not required to exploit this vulnerability.  The specific flaw exists within the WLAvalancheService service, which listens on TCP port 1777 by default. The issue results from dereferencing a null pointer.</td><td>CWE-476 NULL Pointer Dereference</td></tr>
+<tr><td>If a server hosts a zone containing a KEY Resource Record, or a resolver DNSSEC-validates a KEY Resource Record from a DNSSEC-signed domain in cache, a client can exhaust resolver CPU resources by sending a stream of SIG(0) signed requests.</td><td>CWE-400 Uncontrolled Resource Consumption</td></tr>
+</tbody></table>
+<h2 id="where-do-we-go-from-here">Where Do We Go From Here?</h2>
+<p>Reflecting on this journey, I’ve really enjoyed learning the process, from data analysis and creation to fine-tuning the model. It has helped me understand the fine-tuning approach better and opened up new ideas for future projects.</p>
+<p>There's always room for improvement. If I were to take this project to the next level, here's my game plan:</p>
+<ul>
+<li>Data Analysis: I need to analyze more descriptions to gather additional data. More data can lead to better performance</li>
+<li>Balanced Examples: Ensuring there are an equal number of examples for each CWE class is important to avoid bias in the model</li>
+<li>Training Parameters: I experienced some random gradient explosions during training, so adjusting the training parameters is essential for stability</li>
+<li>Better Hardware: My current PC has its limits. Using more powerful hardware, like Google Colab, would allow for faster iterations and testing</li>
+<li>Utilizing Probabilities: Since I have tensor probabilities for each input, I can leverage them to focus on the top 'n' predictions.</li>
+</ul>
+<p>These are all areas I plan to explore further to deepen my understanding of fine-tuning. I’m looking forward to seeing how these improvements can enhance my work in AI.</p>
+<p>If you want to try it yourself, you can find the model here:
+<a href="https://huggingface.co/Dunateo/roberta-cwe-classifier-kelemia">Kelemia model</a></p>
+<div align="center">
+  <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzg3Z3g2dHBsZTgzdWE4ejgyOHlvazFnaXl3OGZzeWwyNDBnYTQxMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/AtemeKRsPRVESJ8zRq/giphy.gif" alt="IA gif">
+</div>
+
+        </section>
+
+        
+
+    </article>
+</main>
+
+
+
+        <footer>
+  <div style="display:flex">
+    
+        <a class="soc" href=https:&#x2F;&#x2F;github.com&#x2F;Dunateo title=GitHub>
+            <i data-feather=github></i>
+        </a>
+    
+        <a class="soc" href=https:&#x2F;&#x2F;twitter.com&#x2F;BruValentin1 title=Twitter>
+            <i data-feather=twitter></i>
+        </a>
+    
+  </div>
+  <div class="footer-info">
+    2026 © Dunateo | <a
+      href="https://github.com/XXXMrG/archie-zola">Archie-Zola Theme</a>
+  </div>
+</footer>
+
+
+<script>
+    feather.replace();
+</script>
+
+
+    </div>
+</body>
+
+</html>
