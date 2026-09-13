@@ -1,0 +1,35 @@
+/* Featured News Card Layout */
+.featured-news-card {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.featured-news-card h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 0 0 0.5rem 0;
+}
+
+.featured-news-card h2 a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.featured-news-card h2 a:hover {
+    color: #fff; /* Ensure text is white on hover */
+}
+
+.featured-news-card .meta {
+    font-size: 0.9em;
+    color: var(--text-color-light);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.featured-news-card .description {
+    font-size: 1.1em;
+    color: var(--text-color);
+}
