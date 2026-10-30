@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    
+        <title>
+             CyberNews: 12&#x2F;07&#x2F;2026 Edition
+            
+        </title>
+
+        
+            <meta property="og:title" content="CyberNews: 12&#x2F;07&#x2F;2026 Edition" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Binarly researchers uncovered six critical vulnerabilities in U-Boot, an open-source bootloader used in millions of embedded devices like routers, smart cameras..." />
+        
+    
+
+    
+        
+            <meta name="description" content="Binarly researchers uncovered six critical vulnerabilities in U-Boot, an open-source bootloader used in millions of embedded devices like routers, smart cameras..." />
+        
+    
+
+    
+
+    
+
+    
+
+    
+    
+        <script src=https://dunateo.github.io/js/feather.min.js></script>
+    
+
+
+    
+        <link href=https://dunateo.github.io/css/fonts.css rel="stylesheet" />
+    
+
+    <link rel="stylesheet" type="text/css" media="screen" href=https://dunateo.github.io/css/main.css />
+    <link rel="stylesheet" type="text/css" href=https://dunateo.github.io/css/news.css />
+
+    
+        <link
+            rel="stylesheet"
+            id="darkModeStyle"
+            type="text/css"
+            href=https://dunateo.github.io/css/dark.css
+            
+                media="(prefers-color-scheme: dark)"
+            
+            
+        />
+    
+
+    
+
+
+    
+
+
+</head>
+
+
+<body>
+    <div class="content">
+        <header>
+    <div class="main" id="main_title">
+        <a href=https:&#x2F;&#x2F;dunateo.github.io&#x2F;>Duna&#x27;s Kiat</a>
+    </div>
+
+    <nav>
+        
+            <a href=&#x2F;>Home</a>
+        
+            <a href=&#x2F;posts>All posts</a>
+        
+            <a href=&#x2F;news>News</a>
+        
+            <a href=&#x2F;about>About</a>
+        
+
+        
+            |
+
+            
+                <a href=&#x2F;>en</a>
+            
+        
+
+        
+    </nav>
+</header>
+
+
+        
+    
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">CyberNews: 12&#x2F;07&#x2F;2026 Edition</h1>
+            <div class="meta">
+                
+                    Published by <a href="https:&#x2F;&#x2F;github.com&#x2F;Dunateo" target="_blank">Dunateo</a>
+                
+                on  2026-07-12
+
+                
+            </div>
+        </div>
+
+        
+
+        <section class="body">
+            <html><body>
+<h2>Today’s roundup</h2>
+<li><a href='https://securityaffairs.com/195150/security/critical-u-boot-bugs-undermine-secure-boot-on-millions-of-devices.html'>Critical U-Boot Bugs Undermine Secure Boot on Millions of Devices</a></li>
+<li><a href='https://thehackernews.com/2026/07/compromised-jscrambler-8140-npm-release.html'>Compromised jscrambler 8.14.0 npm Release Drops Rust Infostealer During Install</a></li>
+<li><a href='https://securityaffairs.com/195164/security/u-s-cisa-adds-icagenda-and-balbooa-forms-flaws-to-its-known-exploited-vulnerabilities-catalog.html'>U.S. CISA adds iCagenda and Balbooa Forms flaws to its Known Exploited Vulnerabilities catalog</a></li>
+<li><a href='https://www.bleepingcomputer.com/news/security/australia-warns-of-global-campaign-targeting-vulnerable-cms-platforms/'>Australia warns of global campaign targeting vulnerable CMS platforms</a></li>
+<li><a href='https://thehackernews.com/2026/07/hackers-weaponize-balochistan-police.html'>Hackers Weaponize Balochistan Police Portal in Multi-Group Espionage Campaigns</a></li>
+<h2>Summary</h2>
+<p>Binarly researchers uncovered six critical vulnerabilities in U-Boot, an open-source bootloader used in millions of embedded devices like routers, smart cameras, and server management controllers. Two of these flaws (BRLY-2026-037, BRLY-2026-038) allow arbitrary code execution during the boot image verification process, effectively undermining secure boot mechanisms. The vulnerabilities, present since U-Boot version v2013.07, could enable attackers to compromise devices before the operating system or security software loads, making detection and removal extremely difficult. While physical access is often assumed for bootloader exploits, remote exploitation is possible through interfaces like server BMCs. Patches for all six issues are now available in U-Boot's master branch. <br><br>Security researchers have identified a critical supply chain attack involving version 8.14.0 of the jscrambler npm package, which was compromised on July 11, 2026. Installing this malicious version automatically executes a Rust-based infostealer on the user's machine, affecting Windows, macOS, and Linux systems. The malware leverages a "preinstall" hook to drop and run a native binary. Security firm Socket detected the malicious release just six minutes after its publication, highlighting the rapid nature of the threat. <br><br>The U.S. Cybersecurity and Infrastructure Security Agency (CISA) has added two new vulnerabilities to its Known Exploited Vulnerabilities (KEV) catalog, mandating federal agencies to remediate them by July 13, 2026. The flaws, both rated CVSS 10.0, are CVE-2026-48939 in iCagenda and CVE-2026-56291 in Balbooa Forms, both Joomla extensions. These vulnerabilities enable unauthenticated arbitrary file upload, leading to full remote code execution on affected web servers. Their inclusion in the KEV catalog indicates active exploitation in the wild. <br><br>The Australian Cyber Security Centre (ACSC) has issued a global alert regarding an active exploitation campaign targeting vulnerable Content Management Systems (CMS) platforms and their associated plugins. The advisory warns organizations worldwide about the widespread nature of these attacks, urging them to identify and patch known vulnerabilities in their CMS infrastructure to prevent potential compromise and data breaches. <br><br>Cybersecurity researchers have detailed a sophisticated, multi-group cyber espionage campaign that has targeted several Pakistani law enforcement organizations, including the Balochistan Police portal, between February 2024 and April 2026. Threat actors, suspected to be aligned with China and India, weaponized compromised web application servers managing sensitive police and citizen data, such as criminal and identity records, for sustained intelligence gathering.</p>
+<h2>Want to dig deeper?</h2>
+<h3>Vulnerabilities</h3>
+<table><tbody><tr> <td><a href='https://vulnerability.circl.lu/vuln/CVE-2026-48939'>CVE-2026-48939</a></td>  <td data-severity='Critical'>Critical</td> </tr>
+<tr> <td><a href='https://vulnerability.circl.lu/vuln/CVE-2026-56291'>CVE-2026-56291</a></td>  <td data-severity='Critical'>Critical</td> </tr>
+</tbody></table><h3>Malware Families</h3>
+<table><tbody><tr> <td><a href='https://malpedia.caad.fkie.fraunhofer.de/details/win.global'>Global</a></td>  <td>GLOBAL GROUP</td> </tr>
+</tbody></table></body></html>
+        </section>
+
+        
+
+    </article>
+</main>
+
+
+
+        <footer>
+  <div style="display:flex">
+    
+        <a class="soc" href=https:&#x2F;&#x2F;github.com&#x2F;Dunateo title=GitHub>
+            <i data-feather=github></i>
+        </a>
+    
+        <a class="soc" href=https:&#x2F;&#x2F;twitter.com&#x2F;BruValentin1 title=Twitter>
+            <i data-feather=twitter></i>
+        </a>
+    
+  </div>
+  <div class="footer-info">
+    2026 © Dunateo | <a
+      href="https://github.com/XXXMrG/archie-zola">Archie-Zola Theme</a>
+  </div>
+</footer>
+
+
+<script>
+    feather.replace();
+</script>
+
+
+    </div>
+</body>
+
+</html>
