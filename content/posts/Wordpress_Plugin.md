@@ -63,7 +63,7 @@ The architecture I cooked up was like a tech smoothie: WordPress for authenticat
 On the backend side, I went full microservice : a front reverse proxy, the API, and Keycloak. Why Keycloak? Well, they wouldn't let me use the Enterprise SSO and weren't keen on creating a service account. So, I had to deploy a tank in a Polly Pocket house to create service accounts and verify my JWT tokens.
 
 <div align="center">
-<img src="https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/wp_plug_archi.png?raw=true" alt="Architecture Diagram">
+<img src="/images/wp_plug_archi.png" alt="Architecture Diagram">
 </div>
 
 The final diagram with 4 different networks to isolate and have control on communications between microservices.

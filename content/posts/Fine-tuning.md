@@ -24,7 +24,7 @@ My goal? To fine-tune a large language model. It's like teaching an AI to unders
 
 So, there I was, ready to start this journey into AI and Cybersecurity. Who knew that trying to make a computer grasp vulnerabilities could be so intriguing? (me)
 
-![concept diagram](https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/concept.png?raw=true)
+![concept diagram](/images/concept.png)
 
 ## Creating Dataset
 
@@ -138,9 +138,9 @@ The gap between training and evaluation loss suggests our model's got some good 
 
 For the data visualization lovers, here are some nifty Tensorboard graphs:
 
-![eval/loss graph](https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/tensorboard_1.png?raw=true)
+![eval/loss graph](/images/tensorboard_1.png)
 
-![training graphs](https://github.com/Dunateo/dunateo.github.io/blob/main/content/images/tensorboard_2.png?raw=true)
+![training graphs](/images/tensorboard_2.png)
 
 ## Inference
 

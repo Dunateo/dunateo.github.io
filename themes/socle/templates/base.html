@@ -4,8 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {#- Apply a saved theme before first paint (no flash). Runs locally, stores nothing but "light"/"dark". -#}
-    <script>(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+    {#- Strict CSP: everything is served from this site, no inline scripts or styles. GitHub Pages
+        cannot send headers, so it is set here (frame-ancestors is not supported in a meta tag).
+        i.giphy.com: animated GIFs embedded in some posts. -#}
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' https://i.giphy.com; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     {%- set cu = current_url | default(value="") %}
     {%- if page?.title %}{% set doc_title = page.title ~ " · " ~ config.title %}
@@ -36,6 +39,10 @@
     <link rel="stylesheet" href="{{ get_url(path='css/tokens.css', cachebust=true) }}">
     <link rel="stylesheet" href="{{ get_url(path='css/socle.css', cachebust=true) }}">
     <link rel="stylesheet" href="{{ get_url(path='css/site.css', cachebust=true) }}">
+    {#- Code highlighting (markdown.highlighting.style = "class"); theme-init.js picks light/dark. -#}
+    <link id="giallo-light" rel="stylesheet" href="{{ get_url(path='giallo-light.css') }}" media="(prefers-color-scheme: light)">
+    <link id="giallo-dark" rel="stylesheet" href="{{ get_url(path='giallo-dark.css') }}" media="(prefers-color-scheme: dark)">
+    <script src="{{ get_url(path='js/theme-init.js', cachebust=true) }}"></script>
     <script defer src="{{ get_url(path='js/site.js', cachebust=true) }}"></script>
     <script defer src="{{ get_url(path='js/socle.js', cachebust=true) }}"></script>
 </head>

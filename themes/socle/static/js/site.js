@@ -27,6 +27,7 @@
       root.dataset.theme = next;
       store(next);
       label();
+      if (window.socleSyncCodeTheme) window.socleSyncCodeTheme();
     });
     if (window.matchMedia) {
       var mq = window.matchMedia('(prefers-color-scheme: dark)');

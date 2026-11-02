@@ -261,10 +261,6 @@ main { flex: 1; padding: 40px 0 64px; }
   .prose pre { margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); border-left: 0; border-right: 0; box-shadow: none; }
 }
 
-/* Zola's highlighter inlines `color-scheme: light dark`: make it follow the site toggle */
-[data-theme="light"] .prose pre.giallo { color-scheme: light !important; }
-[data-theme="dark"] .prose pre.giallo { color-scheme: dark !important; }
-
 /* Tables (wrapped in .table-wrap by site.js for horizontal scroll) */
 .table-wrap { width: fit-content; max-width: 100%; overflow-x: auto; border: 2px solid var(--line); background: var(--paper-raised); box-shadow: var(--shadow-hard-sm); margin-right: 2px; }
 .prose table { border-collapse: collapse; font: 400 14px/1.4 var(--font-sans); }

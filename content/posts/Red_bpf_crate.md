@@ -7,7 +7,6 @@ description = "Enhance your eBPF library in Rust with Cargo-BPF for seamless ins
 author = { name = "Dunateo", social= "https://github.com/Dunateo" }
 +++
 
-<img src="https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fwww.straypaper.com%2Fcontent%2Fimages%2F2023%2F04%2FEBPF_logo-1.png&sp=1711505863Td178151d1995d502ea0334c6d5eb233ab538809ac79edd74e06d70d1b612bebf" alt="ebpf logo" width="180" height="80" />
 <aside>
 💡 Enhance your eBPF library in Rust with Cargo-BPF for seamless installation and optimal performance.
 
