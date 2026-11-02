@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %}
+<header class="article-head">
+    <p class="eyebrow"><span class="sc-label">Writing · {{ section.pages | length }} posts</span></p>
+    <h1 class="h1">{% if section.title %}{{ section.title }}{% else %}All posts{% endif %}</h1>
+    {%- if section.description %}<p class="lead">{{ section.description }}</p>{% endif %}
+</header>
+<ul class="card-grid after-head">
+    {%- for page in section.pages %}
+    <li>{{<post_card page={page} n={loop.index} heading="h2" />}}</li>
+    {%- endfor %}
+</ul>
+{% endblock main %}

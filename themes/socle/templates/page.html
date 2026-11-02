@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block main %}
+{%- set kind = page.components | first %}
+<article class="article">
+    {%- if kind == "posts" or kind == "news" %}
+    <a class="more-link back-link" href="{{ get_url(path='/' ~ kind ~ '/') }}">{{<icon name="arrow-left" />}}{% if kind == "news" %}All editions{% else %}All posts{% endif %}</a>
+    {%- endif %}
+    <header class="article-head">
+        <div class="meta">
+            {%- if kind == "news" %}<span class="sc-badge sc-badge--solid">News</span>
+            {%- elif kind == "posts" %}<span class="sc-badge">Post</span>{% endif %}
+            {%- if page.date %}<span class="data">{{<pubdate d={page.date} />}}</span>{% endif %}
+            {%- if kind == "posts" %}<span class="data">{{ page.reading_time }} min read</span>{% endif %}
+            {%- if page.draft %}<span class="sc-badge sc-badge--warning">Draft</span>{% endif %}
+        </div>
+        <h1 class="h1">{{ page.title }}</h1>
+        {%- if page.description and kind != "news" %}<p class="lead">{{ page.description }}</p>{% endif %}
+        <div class="sc-spectrum" aria-hidden="true"></div>
+    </header>
+
+    {%- if page.extra.tldr %}
+    <div class="sc-alert tldr">
+        <div class="sc-alert__band"></div>
+        <div class="sc-alert__body"><span class="sc-label">tl;dr</span><span>{{ page.extra.tldr }}</span></div>
+    </div>
+    {%- endif %}
+
+    <div class="prose">
+        {{ page.content | safe }}
+    </div>
+
+    {%- if kind == "posts" or kind == "news" %}
+    {%- if page.higher or page.lower %}
+    <nav class="post-nav" aria-label="More {{ kind }}">
+        {%- if page.lower %}
+        <a href="{{ page.lower.permalink | safe }}" rel="prev"><span class="sc-label">← Older</span><strong>{{ page.lower.title }}</strong></a>
+        {%- endif %}
+        {%- if page.higher %}
+        <a class="next" href="{{ page.higher.permalink | safe }}" rel="next"><span class="sc-label">Newer →</span><strong>{{ page.higher.title }}</strong></a>
+        {%- endif %}
+    </nav>
+    {%- endif %}
+    {%- endif %}
+</article>
+{% endblock main %}

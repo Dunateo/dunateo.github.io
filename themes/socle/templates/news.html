@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block main %}
+{%- if paginator %}{% set items = paginator.pages %}{% else %}{% set items = section.pages %}{% endif %}
+<header class="article-head">
+    <p class="eyebrow"><span class="sc-label">Daily roundup · {% if paginator %}{{ paginator.total_pages }}{% else %}{{ section.pages | length }}{% endif %} editions</span></p>
+    <h1 class="h1">{% if section.title %}{{ section.title }}{% else %}Security news{% endif %}</h1>
+    {%- if section.description %}<p class="lead">{{ section.description }}</p>{% endif %}
+</header>
+
+<div class="after-head">
+    {%- if items %}
+    {%- set first_page = true %}
+    {%- if paginator and paginator.current_index > 1 %}{% set first_page = false %}{% endif %}
+    {%- if first_page %}
+    {{<news_featured page={items | first} heading="h2" />}}
+    <h2 class="visually-hidden">Previous editions</h2>
+    {%- endif %}
+    <ul class="news-list">
+        {%- for page in items %}
+        {%- if first_page and loop.first %}{% else %}
+        {{<news_row page={page} />}}
+        {%- endif %}
+        {%- endfor %}
+    </ul>
+    {%- endif %}
+    {%- if paginator %}{{<pagination paginator={paginator} />}}{% endif %}
+</div>
+{% endblock main %}

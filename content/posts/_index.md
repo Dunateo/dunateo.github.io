@@ -1,4 +1,6 @@
 +++
+title = "All posts"
+description = "Bigger, Longer write-up."
 template = "posts.html"
 transparent = true
 sort_by = "date"

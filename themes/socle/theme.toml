@@ -1,0 +1,8 @@
+name = "socle"
+description = "Zola theme built on the Socle design kit: Klein blue, square corners, hard shadows, self-hosted fonts."
+license = "MIT"
+min_version = "0.23.0"
+
+[author]
+name = "Dunateo"
+homepage = "https://github.com/Dunateo"

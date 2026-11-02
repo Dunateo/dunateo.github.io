@@ -1,0 +1,107 @@
+{%- set cp = current_path | default(value="/") -%}
+<!DOCTYPE html>
+<html lang="{{ lang | default(value=config.default_language) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {#- Apply a saved theme before first paint (no flash). Runs locally, stores nothing but "light"/"dark". -#}
+    <script>(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+
+    {%- set cu = current_url | default(value="") %}
+    {%- if page?.title %}{% set doc_title = page.title ~ " · " ~ config.title %}
+    {%- elif section?.title %}{% set doc_title = section.title ~ " · " ~ config.title %}
+    {%- else %}{% set doc_title = config.title %}{% endif %}
+    {%- if page?.description %}{% set doc_desc = page.description %}
+    {%- elif section?.description %}{% set doc_desc = section.description %}
+    {%- else %}{% set doc_desc = config.description %}{% endif %}
+    <title>{{ doc_title }}</title>
+    <meta name="description" content="{{ doc_desc }}">
+    <meta property="og:title" content="{{ doc_title }}">
+    <meta property="og:description" content="{{ doc_desc }}">
+    <meta property="og:site_name" content="{{ config.title }}">
+    <meta property="og:type" content="{{ "article" if page?.title else "website" }}">
+    {%- if cu %}
+    <meta property="og:url" content="{{ cu }}">
+    <link rel="canonical" href="{{ cu }}">
+    {%- endif %}
+
+    <meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+
+    {#- Fonts are self-hosted: no third-party request (GDPR). Preload the two faces used above the fold. -#}
+    <link rel="preload" href="{{ get_url(path='fonts/inter-latin-400-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ get_url(path='fonts/montserrat-latin-800-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{ get_url(path='css/fonts.css', cachebust=true) }}">
+    <link rel="stylesheet" href="{{ get_url(path='css/tokens.css', cachebust=true) }}">
+    <link rel="stylesheet" href="{{ get_url(path='css/socle.css', cachebust=true) }}">
+    <link rel="stylesheet" href="{{ get_url(path='css/site.css', cachebust=true) }}">
+    <script defer src="{{ get_url(path='js/site.js', cachebust=true) }}"></script>
+    <script defer src="{{ get_url(path='js/socle.js', cachebust=true) }}"></script>
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="sc-spectrum" aria-hidden="true"></div>
+        <div class="wrap site-header__inner">
+            <div class="site-header__bar">
+                <a class="brand" href="{{ config.base_url }}" aria-label="{{ config.title }}, home">
+                    <span class="brand__mark" aria-hidden="true">Zn</span>
+                    <span>
+                        <span class="brand__name">{{ config.title }}</span>
+                        {%- if config.extra.subtitle %}
+                        <span class="brand__sub sc-label">{{ config.extra.subtitle }}</span>
+                        {%- endif %}
+                    </span>
+                </a>
+                <div class="header-actions">
+                    <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme" hidden>
+                        {{<icon name="moon" class="i-moon" />}}
+                        {{<icon name="sun" class="i-sun" />}}
+                    </button>
+                </div>
+            </div>
+            <nav class="site-nav" aria-label="Main">
+                <ul>
+                    {%- for item in config.extra.menus %}
+                    {%- if item.url == "/" %}{% set active = cp == "/" %}
+                    {%- else %}{% set active = cp is starting_with(pat=item.url) %}{% endif %}
+                    <li><a href="{{ get_url(path=item.url) }}"{% if active %} aria-current="page"{% endif %}>{{ item.name }}</a></li>
+                    {%- endfor %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+        <div class="wrap">
+            {% block main %}{% endblock main %}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap site-footer__inner">
+            {%- if config.extra.social %}
+            <ul class="social" aria-label="Elsewhere">
+                {%- for s in config.extra.social %}
+                <li><a href="{{ s.url }}" rel="me noopener">{{<icon name={s.icon} />}}<span>{{ s.name }}</span></a></li>
+                {%- endfor %}
+            </ul>
+            {%- endif %}
+            <small>© {{ now() | date(format="%Y") }} {{ config.extra.copyright | default(value=config.title) }}</small>
+        </div>
+    </footer>
+
+    <button class="sc-scroll" type="button" aria-label="Back to top" hidden>
+        <svg class="sc-scroll__ring" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+            <circle class="sc-scroll__track" cx="22" cy="22" r="19"/>
+            <circle class="sc-scroll__bar" cx="22" cy="22" r="19" pathLength="100"/>
+        </svg>
+        <svg class="sc-scroll__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+        <span class="sc-scroll__zn" aria-hidden="true">Zn</span>
+        <span class="sc-scroll__burst" aria-hidden="true"></span>
+    </button>
+</body>
+</html>

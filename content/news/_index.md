@@ -1,4 +1,6 @@
 +++
+title = "Security news"
+description = "Daily digest of security headlines, vulnerabilities and threat actors in the news."
 template = "news.html"
 transparent = true
 sort_by = "date"

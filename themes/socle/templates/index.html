@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block main %}
+{%- set posts = get_section(path="posts/_index.md") %}
+{%- set news = get_section(path="news/_index.md") %}
+{%- set latest_news = news.pages | first %}
+<div class="stack">
+    <section class="hero" aria-labelledby="hero-title">
+        <h1 id="hero-title" class="display hero__title">{{ config.title }}</h1>
+        <div class="lead hero__intro">
+            {%- if section.content %}{{ section.content | safe }}{% else %}<p>{{ config.description }}</p>{% endif %}
+        </div>
+        <div class="actions">
+            <a class="sc-btn sc-btn--primary" href="{{ get_url(path='/posts/') }}">Read the posts{{<icon name="arrow-right" />}}</a>
+            {%- if news.pages %}
+            <a class="sc-btn" href="{{ latest_news.permalink | safe }}">Today's security news</a>
+            {%- endif %}
+        </div>
+    </section>
+
+    {%- if posts.pages %}
+    <section aria-labelledby="latest-posts">
+        <div class="section-head">
+            <div>
+                <span class="sc-label">Writing</span>
+                <h2 id="latest-posts" class="h2">Latest posts</h2>
+            </div>
+            <a class="more-link" href="{{ get_url(path='/posts/') }}">All posts{{<icon name="arrow-right" />}}</a>
+        </div>
+        <ul class="card-grid">
+            {%- for page in posts.pages[:3] %}
+            <li>{{<post_card page={page} n={loop.index} />}}</li>
+            {%- endfor %}
+        </ul>
+    </section>
+    {%- endif %}
+
+    {%- if news.pages %}
+    <section aria-labelledby="latest-news">
+        <div class="section-head">
+            <div>
+                <span class="sc-label">Daily roundup</span>
+                <h2 id="latest-news" class="h2">Security news</h2>
+            </div>
+            <a class="more-link" href="{{ get_url(path='/news/') }}">All editions{{<icon name="arrow-right" />}}</a>
+        </div>
+        {{<news_featured page={latest_news} />}}
+        <ul class="news-list">
+            {%- for page in news.pages[1:5] %}
+            {{<news_row page={page} />}}
+            {%- endfor %}
+        </ul>
+    </section>
+    {%- endif %}
+</div>
+{% endblock main %}
