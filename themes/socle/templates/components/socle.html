@@ -86,3 +86,43 @@
 </nav>
 {%- endif %}
 {%- endcomponent pagination %}
+
+{#- Daily news dashboard, from the edition's [extra.roundup] front matter (written by cybernews).
+    level: low | moderate | high | critical, computed by a fixed rule (see the legend);
+    shown here under a lighter name. -#}
+{% component news_roundup(r: map) -%}
+{%- if r.level == "critical" %}{% set fun = "Just Zinging" %}
+{%- elif r.level == "high" %}{% set fun = "Nice One" %}
+{%- elif r.level == "moderate" %}{% set fun = "Mmhh" %}
+{%- else %}{% set fun = "Banal" %}{% endif %}
+<section class="roundup" data-level="{{ r.level }}" aria-labelledby="roundup-level">
+    <header class="roundup__head">
+        <span class="sc-label roundup__label">Roundup level</span>
+        <p class="roundup__level" id="roundup-level">{{ fun }}</p>
+        <div class="roundup__meter" role="img" aria-label="Level {{ r.level }}, 4 steps"><i></i><i></i><i></i><i></i></div>
+    </header>
+    <dl class="roundup__kpis">
+        <div><dt>Stories</dt><dd>{{ r.stories }}</dd></div>
+        <div><dt>CVEs</dt><dd>{{ r.cves }}</dd></div>
+        <div><dt>Critical CVEs</dt><dd>{{ r.critical }}</dd></div>
+        <div><dt>Exploited</dt><dd>{{ r.exploited }}</dd></div>
+    </dl>
+    {%- if r.categories %}
+    <ul class="roundup__types" aria-label="Stories by category">
+        {%- for c in r.categories %}
+        <li><span class="nb nb--lg nb--{{ c.id }}" title="{{ c.description }}"><span class="nb__label">{{ c.label }}</span><b>{{ c.count }}</b></span></li>
+        {%- endfor %}
+    </ul>
+    {%- endif %}
+    <details class="roundup__legend">
+        <summary>What do these mean?</summary>
+        <dl>
+            {%- for c in r.categories %}
+            <div><dt><span class="nb nb--{{ c.id }}">{{ c.label }}</span></dt><dd>{{ c.description }}</dd></div>
+            {%- endfor %}
+            <div><dt><span class="sc-label">Roundup level</span></dt><dd>Just Zinging: an exploited story with a critical CVE, or 3+ exploited stories. Nice One: a critical CVE or an exploited story. Mmhh: a high CVE or a data breach. Banal: none of that.</dd></div>
+            <div><dt><span class="sc-label">CVE severity</span></dt><dd>From CIRCL or the CVE record; when neither has one yet, the CVSS score quoted by the article.</dd></div>
+        </dl>
+    </details>
+</section>
+{%- endcomponent news_roundup %}

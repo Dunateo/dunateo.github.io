@@ -19,6 +19,10 @@
         <div class="sc-spectrum" aria-hidden="true"></div>
     </header>
 
+    {%- if kind == "news" and page.extra.roundup %}
+    {{<news_roundup r={page.extra.roundup} />}}
+    {%- endif %}
+
     {%- if page.extra.tldr %}
     <div class="sc-alert tldr">
         <div class="sc-alert__band"></div>
